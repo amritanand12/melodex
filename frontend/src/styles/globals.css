@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: "DM Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-0 text-slate-100;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-400 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-600;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-surface-100/80 backdrop-blur-xl border border-white/5;
+  }
+
+  .glass-hover {
+    @apply hover:bg-surface-200/80 hover:border-brand-800/40 transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-brand-500 hover:bg-brand-400 text-surface-0 font-display font-semibold
+           px-5 py-2.5 rounded-xl transition-all duration-200
+           shadow-lg shadow-brand-900/50 hover:shadow-brand-700/50
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply border border-white/10 hover:border-brand-700/50 hover:bg-surface-300/50
+           text-slate-300 hover:text-brand-300
+           px-4 py-2 rounded-xl transition-all duration-200 active:scale-95;
+  }
+
+  .input-field {
+    @apply bg-surface-100 border border-white/5 rounded-xl px-4 py-3
+           text-slate-100 placeholder-slate-500
+           focus:outline-none focus:border-brand-600 focus:ring-1 focus:ring-brand-600/30
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-surface-100/80 backdrop-blur-xl border border-white/5 rounded-2xl p-5 shadow-xl shadow-black/20;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium;
+  }
+}
+
+/* Progress bar */
+.progress-fill {
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Waveform animation */
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.3); }
+  50%       { transform: scaleY(1);   }
+}
+
+.wave-bar {
+  animation: wave 1.2s ease-in-out infinite;
+}
+.wave-bar:nth-child(2) { animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { animation-delay: 0.3s; }
+.wave-bar:nth-child(5) { animation-delay: 0.15s; }
