@@ -95,23 +95,23 @@ services:
       - melodex_net
 
   # ─── Flower (Celery Monitor) ─────────────────────────────────────────
-  flower:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.worker
-    command: celery -A app.workers.celery_app flower --port=5555 --broker=redis://redis:6379/1
-    ports:
-      - "5555:5555"
-    environment:
-      - CELERY_BROKER_URL=redis://redis:6379/1
-      - CELERY_RESULT_BACKEND=redis://redis:6379/2
-      - REDIS_URL=redis://redis:6379/0
-    depends_on:
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - melodex_net
+  # flower:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: Dockerfile.worker
+  #   command: celery -A app.workers.celery_app flower --port=5555 --broker=redis://redis:6379/1
+  #   ports:
+  #     - "5555:5555"
+  #   environment:
+  #     - CELERY_BROKER_URL=redis://redis:6379/1
+  #     - CELERY_RESULT_BACKEND=redis://redis:6379/2
+  #     - REDIS_URL=redis://redis:6379/0
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #   restart: unless-stopped
+  #   networks:
+  #     - melodex_net
 
   # ─── PostgreSQL ──────────────────────────────────────────────────────
   postgres:
@@ -148,32 +148,32 @@ services:
       - melodex_net
 
   # ─── Prometheus ──────────────────────────────────────────────────────
-  prometheus:
-    image: prom/prometheus:latest
-    volumes:
-      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    ports:
-      - "9090:9090"
-    restart: unless-stopped
-    networks:
-      - melodex_net
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   volumes:
+  #     - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - prometheus_data:/prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   restart: unless-stopped
+  #   networks:
+  #     - melodex_net
 
   # ─── Grafana ─────────────────────────────────────────────────────────
-  grafana:
-    image: grafana/grafana:latest
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=melodex_grafana
-      - GF_USERS_ALLOW_SIGN_UP=false
-    volumes:
-      - grafana_data:/var/lib/grafana
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
-    restart: unless-stopped
-    networks:
-      - melodex_net
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=melodex_grafana
+  #     - GF_USERS_ALLOW_SIGN_UP=false
+  #   volumes:
+  #     - grafana_data:/var/lib/grafana
+  #   ports:
+  #     - "3001:3000"
+  #   depends_on:
+  #     - prometheus
+  #   restart: unless-stopped
+  #   networks:
+  #     - melodex_net
 
 volumes:
   postgres_data:
